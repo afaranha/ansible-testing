@@ -1,0 +1,36 @@
+---
+
+- name: Run federation SSO setup on reproducer
+  hosts: "{{ cifmw_target_host | default('localhost') }}"
+  gather_facts: true
+  vars:
+    cifmw_federation_deploy_type: "uni"
+  tasks:
+    - name: Read uni vars from federation role
+      ansible.builtin.import_role:
+        name: federation
+        vars_from: uni-vars.yml
+      when: cifmw_federation_deploy_type == "uni"
+    - debug:
+        msg: "UNI"
+      when: cifmw_federation_deploy_type == "uni"
+    - debug:
+        var: cifmw_federation_keycloak_url
+
+    - name: Read crc vars from federation role
+      ansible.builtin.import_role:
+        name: federation
+        vars_from: crc-vars.yml
+      when: cifmw_federation_deploy_type == "crc"
+    - debug:
+        msg: "CRC"
+      when: cifmw_federation_deploy_type == "crc"
+    - debug:
+        var: cifmw_federation_keycloak_url
+
+    - name: Read all vars from federation role
+      ansible.builtin.import_role:
+        name: federation
+        vars_from: all-vars.yml
+    - debug:
+        var: cifmw_federation_keycloak_realm2
