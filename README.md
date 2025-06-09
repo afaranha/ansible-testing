@@ -1,5 +1,6 @@
 Current output:
 
+```
 $ ansible-playbook main.yml 
 [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
 
@@ -33,3 +34,4 @@ ok: [localhost] => {
 
 PLAY RECAP ********************************************************************************************************************************************************************************************************
 localhost                  : ok=5    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+```
